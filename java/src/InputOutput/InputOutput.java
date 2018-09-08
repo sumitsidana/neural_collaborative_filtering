@@ -58,12 +58,10 @@ public class InputOutput {
 
 				// TODO Auto-generated method stub
 			}
-			printWriter.close();
 			br.close();
 		}
 
 		//test.ratings
-		System.out.println(userItemMap);
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile2)))) {
 			String line;
 			while ((line = br.readLine()) != null) {				
@@ -71,7 +69,6 @@ public class InputOutput {
 
 				String user = array[0];
 				String item = array[1];
-				System.out.println(user+":"+item);
 				printWriter.print("("+user+","+item+")"+"\t");
 				List<String>itemMap = userItemMap.get(user);
 
