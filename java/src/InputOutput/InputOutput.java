@@ -63,7 +63,7 @@ public class InputOutput {
 		}
 
 		//test.ratings
-
+		System.out.println(userItemMap);
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile2)))) {
 			String line;
 			while ((line = br.readLine()) != null) {				
