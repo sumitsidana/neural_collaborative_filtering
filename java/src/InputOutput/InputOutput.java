@@ -32,7 +32,7 @@ public class InputOutput {
 
 	public static void writeNegRatings(String inputFile1, String inputFile2,  String outputFile) throws IOException{
 
-		PrintWriter printWriter = new PrintWriter (outputFile);
+		PrintWriter printWriter = new PrintWriter(outputFile);
 		Map<String, List<String>> userItemMap = new LinkedHashMap<String, List<String>>();
 		//test_all_raw.csv
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile1)))) {
@@ -72,7 +72,7 @@ public class InputOutput {
 				String user = array[0];
 				String item = array[1];
 				System.out.println(user+":"+item);
-				printWriter.print(user+","+item+"\t");
+				printWriter.print("("+user+","+item+")"+"\t");
 				List<String>itemMap = userItemMap.get(user);
 
 				for(String negItem : itemMap){
