@@ -73,7 +73,7 @@ public class InputOutput {
 				List<String>itemMap = userItemMap.get(user);
 
 				for(String negItem : itemMap){
-					printWriter.print(negItem);
+					printWriter.print(negItem+"\t");
 				}
 				printWriter.println();
 
