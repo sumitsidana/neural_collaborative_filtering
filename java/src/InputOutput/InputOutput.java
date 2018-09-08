@@ -41,20 +41,20 @@ public class InputOutput {
 				String [] array = line.split("\t");
 				String user = array[0];
 				String item = array[1];
-				if(array[2].equals("1")){
-					if(userItemMap.containsKey(user)){
-						List<String>itemMap = userItemMap.get(user);
-						if(!(itemMap.contains(item))){
-							itemMap.add(item);
-							userItemMap.put(user, itemMap);
-						}
-					}
-					else{
-						List<String>itemMap = new LinkedList<String>();
+				//				if(array[2].equals("1")){
+				if(userItemMap.containsKey(user)){
+					List<String>itemMap = userItemMap.get(user);
+					if(!(itemMap.contains(item))){
 						itemMap.add(item);
 						userItemMap.put(user, itemMap);
 					}
 				}
+				else{
+					List<String>itemMap = new LinkedList<String>();
+					itemMap.add(item);
+					userItemMap.put(user, itemMap);
+				}
+				//				}
 
 				// TODO Auto-generated method stub
 			}
@@ -74,6 +74,7 @@ public class InputOutput {
 
 				printWriter.print("("+user+","+item+")"+"\t");
 				List<String>itemMap = userItemMap.get(user);
+
 				for(String negItem : itemMap){
 					printWriter.print(negItem);
 				}
