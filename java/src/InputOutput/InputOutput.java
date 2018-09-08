@@ -71,7 +71,7 @@ public class InputOutput {
 
 				String user = array[0];
 				String item = array[1];
-
+				System.out.println(user+":"+item);
 				printWriter.print("("+user+","+item+")"+"\t");
 				List<String>itemMap = userItemMap.get(user);
 
