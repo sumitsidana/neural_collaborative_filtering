@@ -71,13 +71,17 @@ public class InputOutput {
 				String item = array[1];
 				printWriter.print("("+user+","+item+")"+"\t");
 				List<String>itemMap = userItemMap.get(user);
-
+				int size = 0;
 				for(String negItem : itemMap){
-					printWriter.print(negItem+"\t");
+					if(size < itemMap.size() - 1){
+						printWriter.print(negItem+"\t");
+						size++;
+					}
+					else{
+						printWriter.print(negItem);
+					}
 				}
 				printWriter.println();
-
-
 				// TODO Auto-generated method stub
 			}
 			printWriter.close();
