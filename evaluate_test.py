@@ -21,7 +21,7 @@ _testRatings = None
 _testNegatives = None
 _K = None
 
-def evaluate_model(model, testRatings, testNegatives, K, num_thread):
+def evaluate_model_test(model, testRatings, testNegatives, K, num_thread):
     """
     Evaluate the performance (Hit_Ratio, NDCG) of top-K recommendation
     Return: score of each test rating.
@@ -66,10 +66,14 @@ def eval_one_rating(idx):
     for i in xrange(len(items)):
         item = items[i]
         map_item_score[item] = predictions[i]
-    with open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'wba') as csv_file:
+
+    # write best predictions to a file
+    with open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+') as csv_file:
         writer = csv.writer(csv_file)
+        writer.writerow("\n")
         for key, value in map_item_score.items():
             writer.writerow([key, value])
+
     items.pop()
     
     # Evaluate top rank list

@@ -18,6 +18,7 @@ from keras.layers.core import Dense, Lambda, Activation
 from keras.layers import Embedding, Input, Dense, merge, Reshape, Merge, Flatten, Dropout
 from keras.optimizers import Adagrad, Adam, SGD, RMSprop
 from evaluate import evaluate_model
+from evaluate_test import evaluate_model_test
 from Dataset import Dataset
 from time import time
 import sys
@@ -227,6 +228,9 @@ if __name__ == '__main__':
             print('Iteration %d [%.1f s]: HR = %.4f, NDCG = %.4f, loss = %.4f [%.1f s]' 
                   % (epoch,  t2-t1, hr, ndcg, loss, time()-t2))
             if hr > best_hr:
+                #write best predictions
+
+                evaluate_model_test(model, testRatings, testNegatives, topK, evaluation_threads)
                 best_hr, best_ndcg, best_iter = hr, ndcg, epoch
                 if args.out > 0:
                     model.save_weights(model_out_file, overwrite=True)
