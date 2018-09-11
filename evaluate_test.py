@@ -12,6 +12,7 @@ import heapq # for retrieval topK
 import multiprocessing
 import numpy as np
 from time import time
+import csv
 #from numba import jit, autojit
 
 # Global variables that are shared across processes
@@ -61,10 +62,14 @@ def eval_one_rating(idx):
     users = np.full(len(items), u, dtype = 'int32')
     predictions = _model.predict([users, np.array(items)], 
                                  batch_size=100, verbose=0)
-
+    
     for i in xrange(len(items)):
         item = items[i]
         map_item_score[item] = predictions[i]
+    with open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'wba') as csv_file:
+        writer = csv.writer(csv_file)
+        for key, value in map_item_score.items():
+            writer.writerow([key, value])
     items.pop()
     
     # Evaluate top rank list
