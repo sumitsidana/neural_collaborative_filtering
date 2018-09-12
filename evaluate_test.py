@@ -67,20 +67,16 @@ def eval_one_rating(idx):
         item = items[i]
         map_item_score[item] = predictions[i]
 
-    # write best predictions to a file
-    # with open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+') as csv_file:
-    #     writer = csv.writer(csv_file)
-    #     for key, value in map_item_score.items():
-    #         writer.writerow([key, value])
-
-    log = open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+')
-    log.write(str(map_item_score)+"\n")
-    log.close()
-
     items.pop()
     
     # Evaluate top rank list
     ranklist = heapq.nlargest(_K, map_item_score, key=map_item_score.get)
+
+    # Write best predictions to a file
+    log = open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+')
+    log.write(str(ranklist)+"\n")
+    log.close()
+
     hr = getHitRatio(ranklist, gtItem)
     ndcg = getNDCG(ranklist, gtItem)
     return (hr, ndcg)

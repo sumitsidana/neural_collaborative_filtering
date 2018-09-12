@@ -30,6 +30,22 @@ public class InputOutput {
 		}
 	}
 
+	public static void writeTestUsers(String inputFile, String outputFile) throws IOException{
+
+		PrintWriter printWriter = new PrintWriter (outputFile);
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile)))) {
+			String line;
+			while ((line = br.readLine()) != null) {				
+				String [] array = line.split("\t");				
+				printWriter.println(array[0]);
+
+
+				// TODO Auto-generated method stub
+			}
+			printWriter.close();
+			br.close();
+		}
+	}
 	public static void writeNegRatings(String inputFile1, String inputFile2,  String outputFile) throws IOException{
 
 		PrintWriter printWriter = new PrintWriter(outputFile);
