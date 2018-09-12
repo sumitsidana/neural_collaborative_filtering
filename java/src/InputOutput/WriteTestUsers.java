@@ -8,5 +8,4 @@ public class WriteTestUsers {
 		// TODO Auto-generated method stub
 		InputOutput.writeTestUsers(args[0], args[1]);
 	}
-
 }

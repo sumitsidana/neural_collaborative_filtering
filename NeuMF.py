@@ -229,7 +229,7 @@ if __name__ == '__main__':
                   % (epoch,  t2-t1, hr, ndcg, loss, time()-t2))
             if hr > best_hr:
                 #write best predictions
-                log = open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+')
+                log = open(args.dataset+'_dict.csv', 'ab+')
                 log.write( "Iteration: "+str(epoch)+"\n")
                 log.close()
                 evaluate_model_test(model, testRatings, testNegatives, topK, evaluation_threads)
