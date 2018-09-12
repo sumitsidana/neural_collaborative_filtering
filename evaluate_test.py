@@ -68,11 +68,14 @@ def eval_one_rating(idx):
         map_item_score[item] = predictions[i]
 
     # write best predictions to a file
-    with open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+') as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow("\n")
-        for key, value in map_item_score.items():
-            writer.writerow([key, value])
+    # with open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+') as csv_file:
+    #     writer = csv.writer(csv_file)
+    #     for key, value in map_item_score.items():
+    #         writer.writerow([key, value])
+
+    log = open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/interacted/dict.csv', 'ab+')
+    log.write(str(map_item_score)+"\n")
+    log.close()
 
     items.pop()
     
