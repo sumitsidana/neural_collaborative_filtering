@@ -73,7 +73,7 @@ def eval_one_rating(idx):
     ranklist = heapq.nlargest(_K, map_item_score, key=map_item_score.get)
 
     # Write best predictions to a file
-    log = open('/home/sumit/ncf/neural_collaborative_filtering/Data/ml100k/all/ml100k_dict.csv', 'ab+')
+    log = open('/data/sidana/neural_collaborative_filtering/Data/ml100k/all/ml100k_dict.csv', 'ab+')
     log.write(str(ranklist)+"\n")
     log.close()
 
