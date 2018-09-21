@@ -73,7 +73,7 @@ def eval_one_rating(idx):
     ranklist = heapq.nlargest(_K, map_item_score, key=map_item_score.get)
 
     # Write best predictions to a file
-    log = open('/data/sidana/neural_collaborative_filtering/Data/ml1m/all/ml1m_dict.csv', 'ab+')
+    log = open('/data/sidana/neural_collaborative_filtering/ml1m/all/ml1m_dict.csv', 'ab+')
     log.write(str(ranklist)+"\n")
     log.close()
 
