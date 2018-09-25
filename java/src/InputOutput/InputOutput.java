@@ -5,10 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 public class InputOutput {
 	public static void writePosRatings(String inputFile, String outputFile) throws IOException{
@@ -103,5 +106,39 @@ public class InputOutput {
 			printWriter.close();
 			br.close();
 		}
+	}
+	public static void writeGroundTruthForNCF(String inputFile, String outputFile) throws IOException{
+		Map<Long, List<String>>userItemList = new TreeMap<Long,List<String>>();
+		PrintWriter gtTest = new PrintWriter (outputFile);
+		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+			String line;
+			br.readLine();
+			while ((line = br.readLine()) != null) {
+				String [] array = line.split("\t");
+				int rating = Integer.parseInt(array[2]);
+				long user = Long.parseLong(array[0]);
+				String item = array[1];
+				List<String>itemList = new ArrayList<String>();
+				if(userItemList.containsKey(user)){
+					itemList = userItemList.get(user);
+					itemList.add(item);
+				}
+				else{
+					itemList = new ArrayList<String>();
+					itemList.add(item);
+				}
+				userItemList.put(user, itemList);
+			}
+		}
+		for(Entry<Long, List<String>> entry: userItemList.entrySet()){
+			long user = entry.getKey();
+			List<String> items = entry.getValue();
+			gtTest.print(user+" ");
+			for(String elements: items){
+				gtTest.print(elements+" ");
+			}
+			gtTest.println();
+		}
+		gtTest.close();
 	}
 }
