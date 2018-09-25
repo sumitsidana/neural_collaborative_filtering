@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
@@ -140,5 +142,44 @@ public class InputOutput {
 			gtTest.println();
 		}
 		gtTest.close();
+	}
+
+	public static void writeCartesianProductWithFinalRatings(String inputFile1, String inputFile2, String outputFile) throws IOException{
+		/*
+		 * Run with following params
+		java -cp . preProcess.WriteCartesianProductWithFinalRatings 
+		/data/sidana/diversity/kldivergence/param_tune/all_offers_setting/ml100k/test_all_raw.csv 
+		/data/sidana/diversity/kldivergence/param_tune/all_offers_setting/ml100k/cartesian_product 
+		/data/sidana/diversity/kldivergence/param_tune/all_offers_setting/ml100k/test_all_raw_temp.csv
+		 * 
+		 */
+		PrintWriter printWriter = new PrintWriter (outputFile);
+		Set<String>positiveUserOffers = new LinkedHashSet<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile1)))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				String [] array = line.split(",");
+				if(array[2].equals("4")){
+					positiveUserOffers.add(array[0]+"\t"+array[1]);
+				}
+			}
+
+			br.close();
+		}
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile2)))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				String [] array = line.split("\t");
+				String userOfferPair = array[0]+"\t"+array[1];
+				if(positiveUserOffers.contains(userOfferPair)){
+					printWriter.println(userOfferPair+"\t4\t"+array[3]);
+				}
+				else{
+					printWriter.println(userOfferPair+"\t1\t"+array[3]);
+				}
+			}
+			printWriter.close();
+			br.close();
+		}
 	}
 }
