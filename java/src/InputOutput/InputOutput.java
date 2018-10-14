@@ -158,7 +158,7 @@ public class InputOutput {
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(inputFile1)))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				String [] array = line.split(",");
+				String [] array = line.split("\t");
 				if(array[2].equals("4")){
 					positiveUserOffers.add(array[0]+"\t"+array[1]);
 				}
